@@ -14,6 +14,13 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { DatePipe } from '@angular/common'
 
+import { Pro } from '@ionic/pro';
+
+Pro.init('4567c917', {
+  appVersion: '0.0.1'
+});
+
+
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
