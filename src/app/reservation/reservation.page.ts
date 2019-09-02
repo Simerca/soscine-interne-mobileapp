@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
-import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
+import { BarcodeScanner, BarcodeScanResult } from '@ionic-native/barcode-scanner/ngx';
+import { ToastController } from '@ionic/angular';
 
 @Component({
   selector: 'app-reservation',
@@ -11,11 +12,13 @@ import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
 export class ReservationPage implements OnInit {
 
   id:any;
+  result:BarcodeScanResult;
   data:any;
   constructor(
     private route: ActivatedRoute,
     private http:HttpClient,
-    private barcodeScanner:BarcodeScanner
+    private barcodeScanner:BarcodeScanner,
+    private toastCtrl: ToastController,
   ) { }
 
   sub:any;
@@ -34,9 +37,12 @@ export class ReservationPage implements OnInit {
   launchScan(){
 
     this.barcodeScanner.scan().then(barcodeData => {
-      console.log('Barcode data', barcodeData);
+      this.result = barcodeData;
      }).catch(err => {
          console.log('Error', err);
+         this.toastCtrl.create({
+           message:err.message
+         })
      });
 
   }

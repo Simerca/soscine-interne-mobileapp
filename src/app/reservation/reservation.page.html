@@ -1,6 +1,6 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>reservation</ion-title>
+    <ion-title>Reservation</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -11,5 +11,12 @@
         {{c.name}}
       </ion-label>
     </ion-item>
+    
   </ion-list>
+  
+  <ion-card *ngIf="result">
+      <p>{{result.text}}</p>
+  </ion-card>
+  
+
 </ion-content>
