@@ -1,12 +1,15 @@
 <ion-header>
   <ion-toolbar>
+      <ion-buttons slot="start">
+          <ion-back-button></ion-back-button>
+        </ion-buttons>
     <ion-title>Reservation</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
   <ion-list>
-    <ion-item *ngFor="let c of data" (click)="launchScan()">
+    <ion-item *ngFor="let c of data" (click)="launchScan(c.id)">
       <ion-label>
         {{c.name}}
       </ion-label>

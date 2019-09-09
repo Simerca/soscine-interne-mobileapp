@@ -25,19 +25,33 @@ export class ReservationPage implements OnInit {
 
   ngOnInit() {
 
+    this.initItem();
+
+  }
+
+  initItem(){
     this.sub = this.route.params.subscribe(param => {
       this.id = param['id'];
       this.http.get('https://cyberudresh.unet.dev/index.php/api/items_reservations/'+this.id).subscribe(data => {
       this.data = data;
+      });
     });
-    });
-
   }
 
-  launchScan(){
-
+  launchScan(id){
     this.barcodeScanner.scan().then(barcodeData => {
       this.result = barcodeData;
+      var postData = {
+        'item_id':id,
+        'n_serie':this.result.text
+      }
+      this.http.post('https://cyberudresh.unet.dev/index.php/api/set_items_number/', postData,{
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+        }
+        }).subscribe(data => {
+          
+      });
      }).catch(err => {
          console.log('Error', err);
          this.toastCtrl.create({
